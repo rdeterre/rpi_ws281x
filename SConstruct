@@ -51,6 +51,7 @@ platforms = [
 clean_envs = {}
 for platform, tool, flags in platforms:
     env = Environment(
+        CC = os.environ['CC'],
         options = opts,
         tools = tool,
         toolpath = ['.'],
