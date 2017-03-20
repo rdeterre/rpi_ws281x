@@ -51,7 +51,7 @@ class _LED_Data(object):
 
 class Adafruit_NeoPixel(object):
 	def __init__(self, num, pin, freq_hz=800000, dma=5, invert=False,
-			brightness=255, channel=0, strip_type=ws.WS2811_STRIP_RGB):
+			     brightness=255, channel=0, strip_type=0x00100800):
 		"""Class to represent a NeoPixel/WS281x LED display.  Num should be the
 		number of pixels in the display, and pin should be the GPIO pin connected
 		to the display signal line (must be a PWM pin like 18!).  Optional
@@ -110,14 +110,14 @@ class Adafruit_NeoPixel(object):
 		called.
 		"""
 		resp = ws.ws2811_init(self._leds)
-		if resp != ws.WS2811_SUCCESS:
+		if resp != 0:
 			message = ws.ws2811_get_return_t_str(resp)
 			raise RuntimeError('ws2811_init failed with code {0} ({1})'.format(resp, message))
 		
 	def show(self):
 		"""Update the display with the data from the LED buffer."""
 		resp = ws.ws2811_render(self._leds)
-		if resp != ws.WS2811_SUCCESS:
+		if resp != 0:
 			message = ws.ws2811_get_return_t_str(resp)
 			raise RuntimeError('ws2811_render failed with code {0} ({1})'.format(resp, message))
 
