@@ -299,7 +299,7 @@ static int setup_pwm(ws2811_t *ws2811)
 
     dma_cb->source_ad = addr_to_bus(device, device->pwm_raw);
 
-    dma_cb->dest_ad = (uint32_t)&((pwm_t *)PWM_PERIPH_PHYS)->fif1;
+    dma_cb->dest_ad = (uint32_t)(intptr_t) & ((pwm_t *)PWM_PERIPH_PHYS)->fif1;
     dma_cb->txfr_len = byte_count;
     dma_cb->stride = 0;
     dma_cb->nextconbk = 0;
